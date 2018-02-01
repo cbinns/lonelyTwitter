@@ -1,3 +1,16 @@
+/*
+ * LonelyTwitterActivity
+ *
+ * Version 1.0
+ *
+ * January 30, 2018
+ *
+ *  Copyright © 2018 Team X. CMPUT 301 University of Alberta - All Rights Reserved.
+ *  You may use, distribute or modify this code under terms and conditions of the Code of Student Behaviour at University of Alberta.
+ *  You can find a copy of the license in this project. Otherwise please contact contact@abc.ca
+ */
+
+
 package ca.ualberta.cs.lonelytwitter;
 
 import java.io.BufferedReader;
@@ -26,16 +39,31 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class LonelyTwitterActivity extends Activity {
 
+/**
+ * LonelyTwitterActivity
+ *
+ * Version 1.0
+ *
+ * @author cbinns
+ * @see Tweet
+ * @see NormalTweet
+ * @see ImportantTweet
+ */
+public class LonelyTwitterActivity extends Activity {
 	private static final String FILENAME = "tweets.sav";
 	private EditText bodyText;
 	private ListView oldTweetsList;
-
 	private ArrayList<Tweet> tweetList;
 	private ArrayAdapter<Tweet> adapter;
-	
+
 	/** Called when the activity is first created. */
+	/**
+	 * Creates the Lonely Twitter Activity page
+	 * Creates a list of old tweets and displays
+	 *
+	 * @param savedInstanceState Saved users state
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,6 +78,12 @@ public class LonelyTwitterActivity extends Activity {
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
 
+			/**
+			 * On click of the save button adds
+			 * the new tweet to the list view
+			 *
+			 * @param v List view
+			 */
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
@@ -69,6 +103,11 @@ public class LonelyTwitterActivity extends Activity {
 
 		clearButton.setOnClickListener(new View.OnClickListener() {
 
+			/**
+			 * Clears old Tweets from list view
+			 *
+			 * @param v List view
+			 */
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 
@@ -80,6 +119,10 @@ public class LonelyTwitterActivity extends Activity {
 		});
 	}
 
+	/**
+	 * On app startup load persitent
+	 * data from a file to display
+	 */
 	@Override
 	protected void onStart() {
 
@@ -95,6 +138,11 @@ public class LonelyTwitterActivity extends Activity {
 
 	}
 
+	/**
+	 * Load old tweets to display
+	 *
+	 * @throws RuntimeException Exception if file not found
+	 */
 	private void loadFromFile() {
 
 		try {
@@ -115,7 +163,13 @@ public class LonelyTwitterActivity extends Activity {
 		}
 
 	}
-	
+
+	/**
+	 * Save new tweets to file to
+	 * become persitent
+	 *
+	 * @throws RuntimeException If file not found
+	 */
 	private void saveInFile() {
 		try {
 
@@ -136,6 +190,9 @@ public class LonelyTwitterActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Kill the activity
+	 */
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
