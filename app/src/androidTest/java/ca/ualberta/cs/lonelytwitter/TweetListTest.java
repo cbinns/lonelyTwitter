@@ -76,6 +76,7 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
 
     public void testGetTweets(){
         TweetList tweets = new TweetList();
+
         ArrayList<Tweet> sortedTweets;
 
         Calendar cal = Calendar.getInstance();
@@ -103,13 +104,13 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
         tweets.add(tweet);
         tweets.add(tweetBefore);
 
-        tweets.getTweets();
+        sortedTweets = tweets.getTweets();
 
         Log.i("first tweet msg", tweets.getTweet(0).getMessage());
 
-        assertEquals(tweetBefore,tweets.getTweet(0));
-        assertEquals(tweet,tweets.getTweet(1));
-        assertEquals(tweetAfter,tweets.getTweet(2));
+        assertEquals(tweetBefore,sortedTweets.get(0));
+        assertEquals(tweet,sortedTweets.get(1));
+        assertEquals(tweetAfter, sortedTweets.get(2));
 
 
 

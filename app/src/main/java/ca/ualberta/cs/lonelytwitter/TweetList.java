@@ -45,13 +45,15 @@ public class TweetList {
         }
     }
 
-    public void getTweets(){
-        Collections.sort(tweets, new Comparator<Tweet>() {
+    public ArrayList<Tweet> getTweets(){
+        ArrayList<Tweet> sortedTweets = (ArrayList<Tweet>) tweets.clone();
+        Collections.sort(sortedTweets, new Comparator<Tweet>() {
             @Override
             public int compare(Tweet t1, Tweet t2) {
                 return t1.getDate().compareTo(t2.getDate());
             }
         });
+        return sortedTweets;
 
     }
 
