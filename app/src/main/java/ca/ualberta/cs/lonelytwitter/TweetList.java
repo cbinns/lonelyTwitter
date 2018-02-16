@@ -3,6 +3,9 @@ package ca.ualberta.cs.lonelytwitter;
 import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by Abinsi on 2/13/2018.
@@ -42,28 +45,14 @@ public class TweetList {
         }
     }
 
-    public ArrayList<Tweet> getTweets(){
-        // return list of tweets sorted in choronological order
-        // TODO sort in chronological order
-        ArrayList<Tweet> sortedTweets = new ArrayList<Tweet>();
-        int size= tweets.size();
-        int firstTweetIndex;
-        Tweet firstTweet;
-
-        while(sortedTweets.size()< size) {
-            firstTweet = tweets.get(0);                       //initialize first with first tweet in array
-            firstTweetIndex=0;
-            for (int i = 0; i < tweets.size(); i++) {
-                if (tweets.get(i).getDate().before(firstTweet.getDate())) {
-                    firstTweetIndex=i;
-                    firstTweet=tweets.get(i);
-                }
+    public void getTweets(){
+        Collections.sort(tweets, new Comparator<Tweet>() {
+            @Override
+            public int compare(Tweet t1, Tweet t2) {
+                return t1.getDate().compareTo(t2.getDate());
             }
-            sortedTweets.add(tweets.get(firstTweetIndex));
-            tweets.remove(firstTweet);
-        }
+        });
 
-        return sortedTweets;
     }
 
     public int getCount(){

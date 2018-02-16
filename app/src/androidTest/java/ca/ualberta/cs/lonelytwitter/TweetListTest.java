@@ -4,6 +4,8 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Abinsi on 2/13/2018.
@@ -76,30 +78,41 @@ public class TweetListTest extends ActivityInstrumentationTestCase2 {
         TweetList tweets = new TweetList();
         ArrayList<Tweet> sortedTweets;
 
-        Tweet tweetBefore= new NormalTweet("message1");
-        Tweet tweet = new NormalTweet("message2");
-        Tweet tweetAfter = new NormalTweet("message3");
+        Calendar cal = Calendar.getInstance();
+        cal.set(2013, Calendar.JANUARY, 1);
 
+        Date beforeDate = cal.getTime();
+
+        cal.set(2014, Calendar.JANUARY, 1);
+        Date date = cal.getTime();
+
+        cal.set(2015, Calendar.JANUARY, 1);
+        Date afterDate = cal.getTime();
+
+
+        Tweet tweetBefore= new NormalTweet("message1");
+        tweetBefore.setDate(beforeDate);
+
+        Tweet tweet = new NormalTweet("message2");
+        tweet.setDate(date);
+
+        Tweet tweetAfter = new NormalTweet("message3");
+        tweetAfter.setDate(afterDate);
 
         tweets.add(tweetAfter);
         tweets.add(tweet);
         tweets.add(tweetBefore);
 
+        tweets.getTweets();
 
-        sortedTweets = tweets.getTweets();
+        Log.i("first tweet msg", tweets.getTweet(0).getMessage());
 
-        assertEquals(tweetBefore,sortedTweets.get(0));
-        /*
-        assertEquals(tweetBefore.getDate(),sortedTweets.get(0).getDate());
-        assertEquals(tweetBefore.getMessage(),sortedTweets.get(0).getMessage());
+        assertEquals(tweetBefore,tweets.getTweet(0));
+        assertEquals(tweet,tweets.getTweet(1));
+        assertEquals(tweetAfter,tweets.getTweet(2));
 
 
-        assertEquals(tweet.getDate(),sortedTweets.get(1).getDate());
-        assertEquals(tweet.getMessage(),sortedTweets.get(1).getMessage());
 
-        assertEquals(tweetAfter.getDate(),sortedTweets.get(2).getDate());
-        assertEquals(tweetAfter.getMessage(),sortedTweets.get(2).getMessage());
-        */
 
     }
 }
