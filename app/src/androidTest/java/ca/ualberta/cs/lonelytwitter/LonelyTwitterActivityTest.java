@@ -9,6 +9,8 @@ import com.robotium.solo.Solo;
 
 import junit.framework.TestCase;
 
+import java.util.Calendar;
+
 public class LonelyTwitterActivityTest extends ActivityInstrumentationTestCase2 {
 
     private Solo solo;
@@ -55,7 +57,15 @@ public class LonelyTwitterActivityTest extends ActivityInstrumentationTestCase2 
 
         solo.clickInList(0);
         solo.assertCurrentActivity("wrong activity", EditTweetActivity.class);
-        assertTrue(solo.waitForText("TextView"));
+        assertTrue(solo.searchText("Tweet test"));
+
+
+        // test that current year is displayed in date
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        String yearInString = String.valueOf(year);
+
+        assertTrue(solo.searchText(yearInString));
 
         solo.goBack();
         solo.assertCurrentActivity("wrong activity", LonelyTwitterActivity.class);
