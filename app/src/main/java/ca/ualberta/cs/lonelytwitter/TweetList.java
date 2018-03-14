@@ -3,7 +3,7 @@ package ca.ualberta.cs.lonelytwitter;
 import java.util.ArrayList;
 
 public class TweetList {
-    private ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+    private final ArrayList<Tweet> tweets = new ArrayList<Tweet>();     //5. declaration can have final modifier
 
     public TweetList(){
 
